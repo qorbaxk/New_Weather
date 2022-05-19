@@ -10,6 +10,9 @@
 
 .container{
   padding: 10px;
+  max-width: 900px;
+  height: 100vh;
+
   
 }
 
@@ -26,19 +29,18 @@
 
 .selectbox{
   display: flex; 
-  justify-content:space-between;
+  justify-content:center;
   border-radius: 20px;
   padding: 30px;
   margin-top: 30px;
-
-    
 
 }
 
 .btn{
   
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+  margin: 3px;
   color: black;
   background-color: mediumaquamarine;
   border: 0;
