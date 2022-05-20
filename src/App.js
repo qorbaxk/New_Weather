@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Btn from './component/Btn';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import WeatherBtn from './component/WeatherBtn';
+import WeatherBox from './component/WeatherBox';
 
   //1.앱이 실행되자마자 현재 위치기반의 날씨가 보인다
   //2.날씨정보에는 도시, 섭씨, 상태
@@ -11,6 +13,8 @@ import Btn from './component/Btn';
 
 function App() {
 
+  const [weather,setWeather]=useState(null);
+
   const getCurrentLocation=()=>{
     navigator.geolocation.getCurrentPosition((position)=>{
       let lat=position.coords.latitude;
@@ -19,11 +23,19 @@ function App() {
     });
   }
 
-  const getWeatherByCurrentLocation=async(lat,lon)=>{
-    let url = new URL(`https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lon}&units=metric&appid=ef710ba10aec5ee8c5ce8f984a15dff0`);
+  const getCity=async(city)=>{
+    console.log("도시는?",city);
+    let url = new URL(`https://api.openweathermap.org/data/2.5/weather?&units=metric&lang=kr&q=${city}&appid=ef710ba10aec5ee8c5ce8f984a15dff0`);
     let response = await fetch(url);
     let data = await response.json();
-    console.log(data);
+    setWeather(data);
+  }
+
+  const getWeatherByCurrentLocation=async(lat,lon)=>{
+    let url = new URL(`https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lon}&units=metric&lang=kr&appid=ef710ba10aec5ee8c5ce8f984a15dff0`);
+    let response = await fetch(url);
+    let data = await response.json();
+    setWeather(data);
    
   }
 
@@ -35,17 +47,13 @@ function App() {
   return (
     <div>
       <div className='container'>
-        <div className='box'>
-          <p>London</p>
-          <h1>22 &#8451;</h1>
-          <p>clear sky</p>
-        </div>
+        <WeatherBox weather={weather}/>
         <div className='selectbox'>
-         <Btn title="Current Location"/>
-         <Btn title="New York"/>
-         <Btn title="Los Angeles"/>
-         <Btn title="London"/>
-         <Btn title="Sydney"/>
+         <WeatherBtn onClick={()=>getCurrentLocation()}title="Current Location"/>
+         <WeatherBtn onClick={()=>getCity('seoul')} title="Seoul"/>
+         <WeatherBtn onClick={()=>getCity('new york')} title="New York"/>
+         <WeatherBtn onClick={()=>getCity('london')} title="London"/>
+         <WeatherBtn onClick={()=>getCity('sydney')} title="Sydney"/>
         </div>
       </div>
     </div>
