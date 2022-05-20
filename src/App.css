@@ -16,6 +16,7 @@
   padding: 10px;
   max-width: 900px;
   height: 100vh;
+  background-color: rgb(255, 248, 224);
 
 }
 
@@ -50,6 +51,7 @@ h1{
   font-family: 'GongGothicLight';
 
 }
+
 
 .btn2{
   text-align: center;
