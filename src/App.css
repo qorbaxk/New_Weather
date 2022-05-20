@@ -40,9 +40,10 @@ h1{
 }
 
 .selectbox{
-  display: flex; 
-  justify-content:center;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  flex-wrap:wrap;
   border-radius: 20px;
   padding: 30px;
   margin-top: 30px;
