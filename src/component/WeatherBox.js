@@ -5,9 +5,10 @@ const WeatherBox = ({weather}) => {
   return (
     
     <div className='box'>
-        <h4>{weather?.name}</h4><br></br>
-        <h1>{weather?.main.temp} &#8451;</h1><br></br>
+        <h2>{weather?.name}</h2><br></br>
+        <h1>{weather?(weather.main.temp).toFixed(1):null} &#8451;</h1><br></br>
         <h4>{weather?.weather[0].description}</h4>
+        <h6>{weather.rain?"💧"+Object.values(weather.rain)+"mm":null}</h6>
     </div>
     
   )
