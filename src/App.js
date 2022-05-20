@@ -53,6 +53,9 @@ function App() {
          <WeatherBtn onClick={()=>getCity('seoul')} title="Seoul"/>
          <WeatherBtn onClick={()=>getCity('new york')} title="New York"/>
          <WeatherBtn onClick={()=>getCity('london')} title="London"/>
+         <WeatherBtn onClick={()=>getCity('paris')} title="Paris"/>
+         <WeatherBtn onClick={()=>getCity('hong kong')} title="Hong Kong"/>
+         <WeatherBtn onClick={()=>getCity('tokyo')} title="Tokyo"/>
          <WeatherBtn onClick={()=>getCity('sydney')} title="Sydney"/>
         </div>
       </div>
