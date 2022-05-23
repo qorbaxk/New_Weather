@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import WeatherBtn from "./component/WeatherBtn";
 import WeatherBox from "./component/WeatherBox";
 import ClipLoader from "react-spinners/ClipLoader";
+import AirBox from "./component/AirBox";
 
 //1.앱이 실행되자마자 현재 위치기반의 날씨가 보인다
 //2.날씨정보에는 도시, 섭씨, 상태
@@ -27,12 +28,29 @@ function App() {
   const [city, setCity] = useState("Seoul");
   const [loading, setLoading] = useState(false);
   const [apiError, setAPIError] = useState("");
+  const [air, setAir] = useState(null);
+
+  const currentAirQuality = async (lat,lon) =>{
+    let url = new URL(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=962b0453ed99f7d057e1f97431ccf78f8df6a846`);
+    let response = await fetch(url);
+    let data = await response.json();
+    setAir(data);
+  }
+
+  const cityAirQuality = async () =>{
+    let url = new URL(`https://api.waqi.info/feed/${city}/?token=962b0453ed99f7d057e1f97431ccf78f8df6a846`);
+    let response = await fetch(url);
+    let data = await response.json();
+    setAir(data);
+  }
+
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
       getWeatherByCurrentLocation(lat, lon);
+      currentAirQuality(lat,lon);
     });
   };
 
@@ -62,6 +80,7 @@ function App() {
       let data = await response.json();
       setWeather(data);
       setLoading(false);
+      
     } catch (err) {
       setAPIError(err.message);
       setLoading(false);
@@ -70,16 +89,36 @@ function App() {
 
   useEffect(() => {
     getWeatherByCity();
+    cityAirQuality();
   }, [city]);
 
   const handleCityChange = (city) => {
     if (city === "current") {
       getCurrentLocation();
+      currentAirQuality();
 
     } else {
       setCity(city);
+      cityAirQuality(city);
     }
   };
+
+  const airLevel = (aqi)=>{
+    let status = "";
+    if(0<=aqi && aqi < 50){
+        return status = "좋음";   
+    }else if(50<=aqi && aqi<100){
+        return status = "보통"; 
+    }else if(aqi<=100 && aqi<150){
+        return status = "약간 좋지않음"
+    }else if(aqi<=150 && aqi<200){
+        return status = "좋지 않음"
+    }else if(aqi<=200 && aqi<300){
+        return status = "매우 좋지 않음"
+    }else if(aqi<=300 && aqi<500){
+        return status = "위험한"
+    }
+  }
 
   return (
     <div>
@@ -95,10 +134,9 @@ function App() {
           <div className="selectbox">
             <WeatherBtn
               cities={cities}
-              handleCityChange={handleCityChange}
-           
-            />
+              handleCityChange={handleCityChange}/>
           </div>
+          <AirBox air={air} airLevel={airLevel}/>
         </div>
       ) : (
         apiError

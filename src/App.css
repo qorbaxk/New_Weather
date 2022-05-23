@@ -108,3 +108,8 @@ h1 {
   width: 100%;
   background-color: #02343f;
 }
+
+.airbox{
+  border: 1px solid black;
+  text-align: center;
+}
