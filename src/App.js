@@ -13,23 +13,10 @@ import WeatherBox from './component/WeatherBox';
 
 function App() {
 
+  const cities = ["Seoul","New York","London","Paris","Hong Kong","Tokyo","Sydney"];
+
   const [weather,setWeather]=useState(null);
-
-  const getCurrentLocation=()=>{
-    navigator.geolocation.getCurrentPosition((position)=>{
-      let lat=position.coords.latitude;
-      let lon=position.coords.longitude;
-      getWeatherByCurrentLocation(lat,lon);
-    });
-  }
-
-  const getCity=async(city)=>{
-    console.log("도시는?",city);
-    let url = new URL(`https://api.openweathermap.org/data/2.5/weather?&units=metric&lang=kr&q=${city}&appid=ef710ba10aec5ee8c5ce8f984a15dff0`);
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
-  }
+  const [city,setCity]=useState("Seoul");
 
   const getWeatherByCurrentLocation=async(lat,lon)=>{
     let url = new URL(`https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lon}&units=metric&lang=kr&appid=ef710ba10aec5ee8c5ce8f984a15dff0`);
@@ -39,24 +26,43 @@ function App() {
    
   }
 
+  const getCurrentLocation=()=>{
+    navigator.geolocation.getCurrentPosition((position)=>{
+      let lat=position.coords.latitude;
+      let lon=position.coords.longitude;
+      getWeatherByCurrentLocation(lat,lon);
+    });
+  }
+
+  const getWeatherByCity = async()=>{
+    let url = new URL(`https://api.openweathermap.org/data/2.5/weather?&units=metric&lang=kr&q=${city}&appid=ef710ba10aec5ee8c5ce8f984a15dff0`);
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+  }
+
+
+
   useEffect(()=>{
-    getCurrentLocation()
-  
-  },[]);
+    getWeatherByCity();
+  },[city]);
+
+  const handleCityChange = (city) => {
+    if (city === "current") {
+      setCity(null);
+    } else {
+      setCity(city);
+    }
+  };
   
   return (
     <div>
       <div className='container'>
         <WeatherBox weather={weather}/>
         <div className='selectbox'>
-         <WeatherBtn onClick={()=>getCurrentLocation()}title="Current Location"/>
-         <WeatherBtn onClick={()=>getCity('seoul')} title="Seoul"/>
-         <WeatherBtn onClick={()=>getCity('new york')} title="New York"/>
-         <WeatherBtn onClick={()=>getCity('london')} title="London"/>
-         <WeatherBtn onClick={()=>getCity('paris')} title="Paris"/>
-         <WeatherBtn onClick={()=>getCity('hong kong')} title="Hong Kong"/>
-         <WeatherBtn onClick={()=>getCity('tokyo')} title="Tokyo"/>
-         <WeatherBtn onClick={()=>getCity('sydney')} title="Sydney"/>
+         <WeatherBtn cities={cities} handleCityChange={handleCityChange}
+         selectedCity={city}/>
+         
         </div>
       </div>
     </div>
