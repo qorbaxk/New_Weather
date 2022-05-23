@@ -49,7 +49,7 @@ function App() {
 
   const handleCityChange = (city) => {
     if (city === "current") {
-      setCity(null);
+      getCurrentLocation();
     } else {
       setCity(city);
     }
@@ -68,5 +68,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
