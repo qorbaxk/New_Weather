@@ -26,6 +26,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("Seoul");
   const [loading, setLoading] = useState(false);
+  const [apiError, setAPIError] = useState("");
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -36,37 +37,45 @@ function App() {
   };
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    let url = new URL(
-      `https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lon}&units=metric&lang=kr&appid=ef710ba10aec5ee8c5ce8f984a15dff0`
-    );
-    
-    let response = await fetch(url);
-    let data = await response.json();
-    setWeather(data);
-    
+    try {
+      let url = new URL(
+        `https://api.openweathermap.org/data/2.5/weather?&lat=${lat}&lon=${lon}&units=metric&lang=kr&appid=ef710ba10aec5ee8c5ce8f984a15dff0`
+      );
+      setLoading(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+      setLoading(false);
+    } catch (err) {
+      setAPIError(err.message);
+      setLoading(false);
+    }
   };
 
   const getWeatherByCity = async () => {
-
-    let url = new URL(
-      `https://api.openweathermap.org/data/2.5/weather?&units=metric&lang=kr&q=${city}&appid=ef710ba10aec5ee8c5ce8f984a15dff0`
-    );
-    
-    let response = await fetch(url);
-    let data = await response.json();
-    
-    setWeather(data);
-    
+    try {
+      let url = new URL(
+        `https://api.openweathermap.org/data/2.5/weather?&units=metric&lang=kr&q=${city}&appid=ef710ba10aec5ee8c5ce8f984a15dff0`
+      );
+      setLoading(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      setWeather(data);
+      setLoading(false);
+    } catch (err) {
+      setAPIError(err.message);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    
     getWeatherByCity();
   }, [city]);
 
   const handleCityChange = (city) => {
     if (city === "current") {
       getCurrentLocation();
+
     } else {
       setCity(city);
     }
@@ -74,16 +83,26 @@ function App() {
 
   return (
     <div>
+      {loading ? (
+        <div className="container">
+          <div className="center">
+            <ClipLoader color="#02343F" loading={loading} size={100} />
+          </div> 
+        </div>
+      ) : !apiError ? (
         <div className="container">
           <WeatherBox weather={weather} />
           <div className="selectbox">
             <WeatherBtn
               cities={cities}
               handleCityChange={handleCityChange}
-              selectedCity={city}
+           
             />
           </div>
         </div>
+      ) : (
+        apiError
+      )}
     </div>
   );
 }

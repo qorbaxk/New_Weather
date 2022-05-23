@@ -1,59 +1,60 @@
 @font-face {
-  font-family: 'GongGothicMedium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+  font-family: "GongGothicMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'GongGothicLight';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+  font-family: "GongGothicLight";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
-
-.container{
+.container {
   padding: 10px;
   max-width: 900px;
   height: 100vh;
   background-color: rgb(255, 248, 224);
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
 
-
-
-.box{
-  border: 1px solid #02343F;
+.box {
+  border: 1px solid #02343f;
   margin: auto;
   padding: 20px;
   text-align: center;
   margin-top: 30px;
-  color:white;
-  background-color: #02343F;
-  font-family: 'GongGothicLight';
-  
-
+  color: white;
+  background-color: #02343f;
+  font-family: "GongGothicLight";
 }
 
-h1{
+h1 {
   color: aquamarine;
-  font-family: 'GongGothicMedium';
-  
+  font-family: "GongGothicMedium";
 }
 
-.selectbox{
+.selectbox {
   display: flex;
   justify-content: center;
   height: 300px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   border-radius: 20px;
   padding: 30px;
   margin-top: 30px;
-  font-family: 'GongGothicLight';
-
+  font-family: "GongGothicLight";
 }
 
-.menu{
+.menu {
   display: flex;
   justify-content: center;
 }
@@ -69,9 +70,10 @@ h1{
   height: 70px;
   margin: 5px;
 }
-.btn-4:hover{
+
+.btn-4:hover {
   border: none;
-  color:aquamarine;
+  color: aquamarine;
 }
 .btn-4:before,
 .btn-4:after {
@@ -85,28 +87,24 @@ h1{
 }
 .btn-4:before {
   top: 0;
-   left: 0;
-   border-bottom-color: transparent;
-   border-right-color: transparent;
-   border-top-color: #000;
-   border-left-color: #000;
+  left: 0;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-top-color: #000;
+  border-left-color: #000;
 }
-.btn-4:after{
-   bottom: 0;
-   right: 0;
-   border-top-color: transparent;
-   border-left-color: transparent;
-   border-bottom-color: #000;
-   border-right-color: #000;
-   
-   
+.btn-4:after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: #000;
+  border-right-color: #000;
 }
 .btn-4:hover:before,
 .btn-4:hover:after {
   border-color: #000;
   height: 100%;
   width: 100%;
-  background-color: #02343F;
-  
+  background-color: #02343f;
 }
-
