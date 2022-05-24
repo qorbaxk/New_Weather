@@ -8,7 +8,8 @@ import AirBox from "./component/AirBox";
 
 
 function App() {
-  const cities = [
+
+  const cities=[
     "Seoul",
     "New York",
     "London",
@@ -25,6 +26,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [apiError, setAPIError] = useState("");
   const [air, setAir] = useState(null);
+
 
 
   //대기상태 현재위치로 받는 함수
