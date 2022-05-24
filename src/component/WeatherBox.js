@@ -8,7 +8,7 @@ const WeatherBox = ({ weather }) => {
     <div className="box">
       <h2>{weather?.name}</h2>
       <br></br>
-      <h1>{weather ? weather.main.temp.toFixed(1) : null} &#8451;</h1>
+      <div className="ondo">{weather ? weather.main.temp.toFixed(1) : null} &#8451;</div>
       <br></br>
       <h4>{weather?.weather[0].description}</h4>
     </div>

@@ -29,6 +29,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [apiError, setAPIError] = useState("");
   const [air, setAir] = useState(null);
+  const condition = "";
 
   const currentAirQuality = async (lat,lon) =>{
     let url = new URL(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=962b0453ed99f7d057e1f97431ccf78f8df6a846`);
@@ -106,22 +107,23 @@ function App() {
   const airLevel = (aqi)=>{
     let status = "";
     if(0<=aqi && aqi < 50){
-        return status = "좋음";   
+      return status = "좋음"; 
     }else if(50<=aqi && aqi<100){
         return status = "보통"; 
     }else if(aqi<=100 && aqi<150){
-        return status = "약간 좋지않음"
+        return status = "약간 좋지 않음"
     }else if(aqi<=150 && aqi<200){
         return status = "좋지 않음"
     }else if(aqi<=200 && aqi<300){
         return status = "매우 좋지 않음"
     }else if(aqi<=300 && aqi<500){
-        return status = "위험한"
+        return status = "위험함"
     }
   }
 
+
   return (
-    <div>
+    <div className="cover">
       {loading ? (
         <div className="container">
           <div className="center">
@@ -130,13 +132,14 @@ function App() {
         </div>
       ) : !apiError ? (
         <div className="container">
+          <div className="explain">🌞오늘의 날씨🌡️</div>
           <WeatherBox weather={weather} />
-          <div className="selectbox">
-            <WeatherBtn
+          <WeatherBtn
               cities={cities}
               handleCityChange={handleCityChange}/>
-          </div>
-          <AirBox air={air} airLevel={airLevel}/>
+          <div className="explain">😷오늘의 대기상태💨</div>
+          <AirBox air={air} airLevel={airLevel} condition={condition}/>
+
         </div>
       ) : (
         apiError

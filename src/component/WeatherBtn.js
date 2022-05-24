@@ -6,7 +6,7 @@ const WeatherBtn = ({ cities, handleCityChange }) => {
 
   
   return (
-    <div>
+    <div className="alignBox">
       <button
         className="btn-4" 
         onClick={() => handleCityChange("current") }
