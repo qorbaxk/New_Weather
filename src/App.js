@@ -6,12 +6,6 @@ import WeatherBox from "./component/WeatherBox";
 import ClipLoader from "react-spinners/ClipLoader";
 import AirBox from "./component/AirBox";
 
-//1.앱이 실행되자마자 현재 위치기반의 날씨가 보인다
-//2.날씨정보에는 도시, 섭씨, 상태
-//3.버튼이 있어서 (1개는 현재위치 4개는 다른도시)
-//4.도시버튼 누를때마다 도시별 날씨가 보인다
-//5.현재위치 기반 날시를 클릭하면 다시 현재위치 기반으로 돌아온다
-//6.데이터 가져오는 동안 로딩스피너
 
 function App() {
   const cities = [
@@ -23,29 +17,48 @@ function App() {
     "Tokyo",
     "Sydney",
   ];
+  const condition = "";
+  const rainFall = 0;
 
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("Seoul");
   const [loading, setLoading] = useState(false);
   const [apiError, setAPIError] = useState("");
   const [air, setAir] = useState(null);
-  const condition = "";
 
+
+  //대기상태 현재위치로 받는 함수
   const currentAirQuality = async (lat,lon) =>{
-    let url = new URL(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=962b0453ed99f7d057e1f97431ccf78f8df6a846`);
-    let response = await fetch(url);
-    let data = await response.json();
-    setAir(data);
+    try{
+      let url = new URL(`https://api.waqi.info/feed/geo:${lat};${lon}/?token=962b0453ed99f7d057e1f97431ccf78f8df6a846`);
+      setLoading(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      setAir(data);
+      setLoading(false);
+    } catch (err) {
+      setAPIError(err.message);
+      setLoading(false);
+    }
+   
   }
 
+  //대기상태 도시이름으로 받는 함수
   const cityAirQuality = async () =>{
-    let url = new URL(`https://api.waqi.info/feed/${city}/?token=962b0453ed99f7d057e1f97431ccf78f8df6a846`);
-    let response = await fetch(url);
-    let data = await response.json();
-    setAir(data);
+    try{
+      let url = new URL(`https://api.waqi.info/feed/${city}/?token=962b0453ed99f7d057e1f97431ccf78f8df6a846`);
+      setLoading(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      setAir(data);setLoading(false);
+    } catch (err) {
+      setAPIError(err.message);
+      setLoading(false);
+    }
+ 
   }
 
-
+  //현재위치 받아오는 위도경도함수
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
@@ -55,6 +68,7 @@ function App() {
     });
   };
 
+  //현재위치로 날씨 받는 함수
   const getWeatherByCurrentLocation = async (lat, lon) => {
     try {
       let url = new URL(
@@ -71,6 +85,7 @@ function App() {
     }
   };
 
+  //도시이름으로 날씨 받는 함수
   const getWeatherByCity = async () => {
     try {
       let url = new URL(
@@ -88,11 +103,13 @@ function App() {
     }
   };
 
+  //시작할때 실행되는 함수들
   useEffect(() => {
     getWeatherByCity();
     cityAirQuality();
   }, [city]);
 
+  //선택하는 도시 정보 받는 함수
   const handleCityChange = (city) => {
     if (city === "current") {
       getCurrentLocation();
@@ -104,6 +121,7 @@ function App() {
     }
   };
 
+  //대기질 상태 나타내는 함수
   const airLevel = (aqi)=>{
     let status = "";
     if(0<=aqi && aqi < 50){
@@ -133,7 +151,7 @@ function App() {
       ) : !apiError ? (
         <div className="container">
           <div className="explain">🌞오늘의 날씨🌡️</div>
-          <WeatherBox weather={weather} />
+          <WeatherBox weather={weather} rainFall={rainFall} />
           <WeatherBtn
               cities={cities}
               handleCityChange={handleCityChange}/>
