@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# 오늘의 날씨:: 세계 주요 도시
+![실행화면](https://user-images.githubusercontent.com/97217443/169983551-311e4c36-b21f-4782-9b31-24da26e1d1c6.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**내가 있는 지역의 날씨와 세계 주요 도시들의 날씨를 제공해주는 사이트입니다.**
 
-## Available Scripts
+GPS를 이용하여 내가 현재 위치한 지역의 날씨와 대기상태를 제공합니다.<br>
+뿐만 아니라 세계 주요 도시들의 날씨와 대기상태도 제공합니다.
 
-In the project directory, you can run:
+데모 >> https://theworldsweather.netlify.app/
 
-### `npm start`
+***
+## 기능
+* 유저는 gps를 이용하여 내가 위치한 지역의 날씨를 받아볼 수 있다
+* 자신이 위치한 지역을 제외한 7개의 세계 주요 도시의 날씨도 받아볼 수 있다
+* 버튼으로 선택한 지역의 현재 온도와 대기상태를 알 수 있다
+* 대기상태(미세먼지)는 상태에 따라 다른 색깔을 이용하여 직관적으로 보여준다
+* 비가 오는 지역은 따로 설정하여 강수량도 보여준다
+* 반응형웹으로 제작하여 pc 뿐 아니라 모바일에서도 제약없이 사용할 수 있다
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 사용한 기술
+* React
+* HTML
+* CSS
+* Javascript
+* API 연동
