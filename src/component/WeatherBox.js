@@ -20,7 +20,7 @@ const WeatherBox = ({ weather, rainFall }) => {
       <div className="ondo">{weather ? weather.main.temp.toFixed(1) : null} &#8451;</div>
       <br></br>
       <h4>{weather?.weather[0].description}</h4>
-      <h6>{`💧 ${rainFall} mm`}</h6>
+      <h6>{rainFall==0?null:`💧 ${rainFall} mm`}</h6>
     </div>
   );
 };
