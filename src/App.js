@@ -113,7 +113,6 @@ function App() {
   const handleCityChange = (city) => {
     if (city === "current") {
       getCurrentLocation();
-      currentAirQuality();
 
     } else {
       setCity(city);
