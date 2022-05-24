@@ -72,6 +72,7 @@
   width: 100px;
   height: 70px;
   margin: 5px;
+  border: 1px solid black;
 }
 
 .btn-4:hover {
@@ -115,7 +116,6 @@
 .airbox{
 
   text-align: center;
-  width: 300px;
   margin: auto;
   font-family: "GongGothicLight";
   padding:10px;
