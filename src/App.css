@@ -21,7 +21,7 @@
   padding: 10px;
   max-width: 900px;
   background-color:rgb(255, 248, 224);
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 
   
 }
@@ -159,5 +159,6 @@
   font-family: "GongGothicMedium";
   text-align: center;
   font-size: 20px;
+  margin-top: 10px;
 
 }
